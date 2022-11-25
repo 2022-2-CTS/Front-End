@@ -25,7 +25,6 @@
       <br />
       <div class="find-pw" style="color: red; font-size:13px; font-weight: 400; text-align: center;" v-if="state.loggedIn === false">로그인에 실패하였습니다.</div>
       <div class="find-pw" style="color: red; font-size:13px; font-weight: 400; text-align: center;" v-if="state.onlyIdMatch === true">비밀번호가 틀립니다.</div>
-      <div class="find-pw" style="color: red; font-size:13px; font-weight: 400; text-align: center;" v-if="state.onlyPwMatch === true">아이디가 틀립니다.</div>
       <div class="regi">
         계정이 없으신가요?
         <div class="register"  @click="goRegister">회원가입</div>
@@ -48,7 +47,6 @@
         realLoggedIn:false,
         loggedIn:true,
         onlyIdMatch: false,
-        onlyPwMatch: false,
 
         account:{
           id: "",
@@ -65,10 +63,13 @@
           lPw: state.form.loginPw,
         }
         axios.post("/api/account", args).then((res) => {
-          state.account = res.data
-          state.realLoggedIn = true;
-          console.log(res.data);
-          
+          if(res.data === "only id match"){
+            state.onlyIdMatch = true;       
+          }else{
+            state.account = res.data
+            state.realLoggedIn = true;
+            console.log(res.data);
+          }
         }).catch(() => {
           state.loggedIn = false;
         })
