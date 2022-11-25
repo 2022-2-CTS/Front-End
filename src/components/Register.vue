@@ -95,19 +95,16 @@
         <div class="input-id">
           <label for="Rphone">휴대폰 번호</label>
           <Form style="margin-top:10px">
-            <Input type="text" class="input-blank" id="Rphone" v-model="value" @input="state.form.Rphone = $event.target.value"></Input>
-            <button class="input-button">인증요청</button>
-          </Form>
-        </div>
-        <div class="input-id">
-          <label>인증번호 입력</label>
-          <Form>
-            <Input class="input-blank" @input="cert = $event.target.value"></Input>
-            <button class="input-button" style="width:74px">확인</button>
+            <Input type="text" class="input-blank-pw" id="Rphone" v-model="value" @input="state.form.Rphone = $event.target.value"></Input>
           </Form>
         </div>
         <div class="final-btn">
-          <button v-if="state.validate === true && state.pwEqCheck === true" class="final-button" @click="submit">가입 완료</button>
+          <button v-if="state.validate === true && 
+                  state.pwEqCheck === true&&
+                  state.form.Rid != ''&&
+                  state.form.Rpw != ''&&
+                  state.form.RpwCheck != ''&&
+                  state.form.Rphone != ''" class="final-button" @click="submit">가입 완료</button>
           <button v-else disabled="true" class="final-button" @click="submit">가입 완료</button>
         </div>
     </div>
@@ -123,7 +120,7 @@
     name: 'Register', 
     setup(){
       const state = reactive({
-        loggedIn:false,
+        registered : false,
         account:{
           mid: null,
           memberName: "",
@@ -150,6 +147,7 @@
           Rphone : state.form.Rphone,
         };
         axios.post("/api/register", args).then((res) => {
+          state.registered = true;
           console.log(res);
         });
       };
@@ -199,7 +197,9 @@
     },
     methods:{
       goSignUp(){
-        this.$router.push('/')
+        if(this.state.registered){
+          this.$router.push('/')
+        }
       },
     },
     components: {}
