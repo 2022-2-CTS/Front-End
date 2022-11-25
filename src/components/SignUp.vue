@@ -29,7 +29,7 @@
         계정이 없으신가요?
         <div class="register"  @click="goRegister">회원가입</div>
       </div>
-      <div class="find-pw">
+      <div class="find-pw" @click="this.$router.push('/findpw')">
         비밀번호 찾기
       </div>
     </div>

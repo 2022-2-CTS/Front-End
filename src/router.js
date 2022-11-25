@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import SignUp from '@/components/SignUp.vue';
 import Register from '@/components/Register.vue';
+import FindPw from '@/components/FindPw.vue';
 import Map from '@/components/Map.vue';
 import Detail from '@/components/Detail.vue';
 import InfoShare from '@/components/InfoShare.vue';
@@ -21,6 +22,10 @@ const routes = [
     {
       path: "/register",
       component: Register,
+    },
+    {
+      path: "/findpw",
+      component: FindPw,
     },
     {
       path: "/map",
