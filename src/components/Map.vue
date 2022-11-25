@@ -1,5 +1,5 @@
 <template>
-  <BottomNav></BottomNav>
+  <BottomNav :nowPage="nowPage"></BottomNav>
 
   <div id="map">
     <div class="map-category">
@@ -93,6 +93,8 @@ export default {
       // 모달창 오픈 여부
       testModal: false,
       responseData: "",
+      // 현재 페이지 : map (1)
+      nowPage: 1,
     }
   },
   components: {
