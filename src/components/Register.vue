@@ -98,14 +98,17 @@
             <Input type="text" class="input-blank-pw" id="Rphone" v-model="value" @input="state.form.Rphone = $event.target.value"></Input>
           </Form>
         </div>
-        <div class="final-btn">
+        <div class="final-btn" v-if="state.registered === true">
+          <button class="final-button" @click="this.$router.go(-1)">로그인하러가기</button>
+        </div>
+        <div class="final-btn" v-if="state.registered === false">
           <button v-if="state.validate === true && 
                   state.pwEqCheck === true&&
                   state.form.Rid != ''&&
                   state.form.Rpw != ''&&
                   state.form.RpwCheck != ''&&
                   state.form.Rphone != ''&&
-                  state.registered === false" class="final-button" @click="submit">가입 완료</button>
+                  state.registered === false" class="final-button" @click="submit(), state.registered = true">가입 완료</button>
           <button v-else disabled="true" class="final-button" @click="submit">가입 완료</button>
         </div>
     </div>
@@ -141,17 +144,16 @@
         console.log(res);
       })
 
-      const submit = () => {
+      function submit(){
         const args = {
           Rid : state.form.Rid,
           Rpw : state.form.Rpw,
           Rphone : state.form.Rphone,
         };
-        axios.post("/api/register", args).then((res) => {
+        axios.post("/api/register", args).then(() => {
           state.registered = true;
-          console.log(res);
         });
-      };
+      }
       
       const validateCheck = () => {
         const args = {
