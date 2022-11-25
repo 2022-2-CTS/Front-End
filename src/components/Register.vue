@@ -9,18 +9,62 @@
               {{checkList[checkboxes-1]}}
             </button>
           </span>
-          <ModalView v-if="isModalViewed && clickKey == checkboxes-1" @close-modal="isModalViewed = false">
-            <div v-if="clickKey === 0">
-              <PersonalDataAgree />
-            </div>
-            <div v-if="clickKey === 1">
-              <LocationAgree />
-            </div>
-            <div v-if="clickKey === 2">
-              <ADAgree />
-            </div>
-          </ModalView>
         </label>
+        <div class="modal-body">
+          <div v-if="clickKey === 0">
+            <div class="black-bg" v-if="isModalViewed == true" @click="isModalViewed = false">
+              <div class="white-bg">
+                <h4>{{checkList[clickKey]}}</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde rem rerum
+      eveniet eligendi illo cupiditate assumenda accusantium, qui minus eius ut
+      dicta iusto neque itaque earum reiciendis similique officia! Culpa! Odio
+      vel tempora, laudantium at dolorem laborum? Exercitationem aliquam enim
+      ratione laboriosam, repellendus aperiam inventore, quibusdam quasi nam
+      beatae deserunt necessitatibus quam velit rem harum. Quisquam error
+      architecto accusantium ad. Tenetur sint commodi, quaerat quidem quia
+      aspernatur perferendis, possimus explicabo saepe accusantium mollitia
+      numquam minima voluptatum animi iusto omnis. Placeat suscipit sequi iste
+      voluptates ipsum distinctio! Quisquam autem mollitia minima!</p>
+              </div>
+            </div>
+          </div>
+          <div v-if="clickKey === 1">
+            <div class="black-bg" v-if="isModalViewed == true" @click="isModalViewed = false">
+              <div class="white-bg">
+                <h4>{{checkList[clickKey]}}</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde rem rerum
+      eveniet eligendi illo cupiditate assumenda accusantium, qui minus eius ut
+      dicta iusto neque itaque earum reiciendis similique officia! Culpa! Odio
+      vel tempora, laudantium at dolorem laborum? Exercitationem aliquam enim
+      ratione laboriosam, repellendus aperiam inventore, quibusdam quasi nam
+      beatae deserunt necessitatibus quam velit rem harum. Quisquam error
+      architecto accusantium ad. Tenetur sint commodi, quaerat quidem quia
+      aspernatur perferendis, possimus explicabo saepe accusantium mollitia
+      numquam minima voluptatum animi iusto omnis. Placeat suscipit sequi iste
+      voluptates ipsum distinctio! Quisquam autem mollitia minima!</p>
+                
+              </div>
+            </div>
+          </div>
+            <div v-if="clickKey === 2">
+              <div class="black-bg" v-if="isModalViewed == true" @click="isModalViewed = false">
+                <div class="white-bg">
+                  <h4>{{checkList[clickKey]}}</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde rem rerum
+      eveniet eligendi illo cupiditate assumenda accusantium, qui minus eius ut
+      dicta iusto neque itaque earum reiciendis similique officia! Culpa! Odio
+      vel tempora, laudantium at dolorem laborum? Exercitationem aliquam enim
+      ratione laboriosam, repellendus aperiam inventore, quibusdam quasi nam
+      beatae deserunt necessitatibus quam velit rem harum. Quisquam error
+      architecto accusantium ad. Tenetur sint commodi, quaerat quidem quia
+      aspernatur perferendis, possimus explicabo saepe accusantium mollitia
+      numquam minima voluptatum animi iusto omnis. Placeat suscipit sequi iste
+      voluptates ipsum distinctio! Quisquam autem mollitia minima!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
 
         <div class="input-id">
           <label for="Rid">아이디</label>
@@ -68,11 +112,6 @@
   </template>
   
   <script>
-
-  import ModalView from "./ModalView";
-  import ADAgree from "./ADAgree";
-  import PersonalDataAgree from "./PersonalDataAgree";
-  import LocationAgree from "./LocationAgree";
   import {reactive} from "vue"; 
   import axios from "axios";
 
@@ -143,12 +182,6 @@
       }
 
       return {state, submit, validateCheck, Equalcheck}
-    },
-    components: {
-    ModalView,
-    ADAgree,
-    PersonalDataAgree,
-    LocationAgree
     },
     data() {
         return {
@@ -231,6 +264,28 @@
       padding-bottom:100px;
     }
   }
+
+  .modal-body{
+    margin:0;
+  }
+  .black-bg {
+    left:0px;
+    top:0px;
+    width: 100%; height:100%;
+    background: rgba(0,0,0,0.5);
+    position:fixed; padding: 20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+  } 
+  .white-bg {
+    justify-content: center;
+    text-align: center;
+    width: 60%; background: white;
+    border-radius: 8px;
+    padding: 20px;
+  } 
 
   .body-regi h1{
     width:calc(80vh - 250px);
