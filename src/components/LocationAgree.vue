@@ -1,4 +1,4 @@
-<template>
++<template>
   <div class="content">
     <h1>위치정보</h1>
     <div>
@@ -20,9 +20,6 @@
 <script>
 export default {
   name: "Content",
-  props: {
-    msg: String,
-  },
 };
 </script>
 

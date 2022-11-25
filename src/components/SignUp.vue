@@ -1,29 +1,31 @@
 <template>
   <div class="body-sign">
-    <div class="main-title">
+    <div v-if="state.realLoggedIn === true">
+      {{goLogginedMap()}}
+    </div>
+    <div v-else class="main-title">
         <h1>부산시 문화예술 지도</h1>
     </div>
     <div>
       <div>
         <form class="login-item">
           <FormItem>
-            <Input class="login" type="text" v-model="value" placeholder="아이디" @input="id = $event.target.value">
+            <Input class="login" type="text" v-model="value" placeholder="아이디" @input="state.form.loginId = $event.target.value">
             </Input>
           </FormItem>
           <FormItem>
-            <Input class="login" type="text" v-model="value" placeholder="비밀번호" @input="pw = $event.target.value">
+            <Input class="login" type="text" v-model="value" placeholder="비밀번호" @input="state.form.loginPw = $event.target.value">
             </Input>
           </FormItem>
-          <button class="login-button" @click="goMap" v-if="state.loggedIn === true">
+          <div class="login-button" @click="submit()">
             로그인
-          </button>
-          <button class="login-button" @click="goMap" v-if="state.loggedIn === false" disabled="true">
-            로그인
-          </button>
+          </div>
         </form>
       </div>
       <br />
-      <div class="find-pw" style="color: rgb(243, 115, 33); font-size:13px" v-if="state.loggedIn === false">유효하지 않은 아이디 입니다.</div>
+      <div class="find-pw" style="color: red; font-size:13px; font-weight: 400; text-align: center;" v-if="state.loggedIn === false">로그인에 실패하였습니다.</div>
+      <div class="find-pw" style="color: red; font-size:13px; font-weight: 400; text-align: center;" v-if="state.onlyIdMatch === true">비밀번호가 틀립니다.</div>
+      <div class="find-pw" style="color: red; font-size:13px; font-weight: 400; text-align: center;" v-if="state.onlyPwMatch === true">아이디가 틀립니다.</div>
       <div class="regi">
         계정이 없으신가요?
         <div class="register"  @click="goRegister">회원가입</div>
@@ -36,15 +38,62 @@
 </template>
   
   <script>
+
+  import axios from "axios";
   import {reactive} from "vue";
 
   export default {
     setup(){
       const state = reactive({
-        loggedIn:false
+        realLoggedIn:false,
+        loggedIn:true,
+        onlyIdMatch: false,
+        onlyPwMatch: false,
+
+        account:{
+          id: "",
+        },
+        form:{
+          loginId:"",
+          loginPw:"",
+        }
       });
 
-      return { state };
+      const submit = () =>{
+        const args = {
+          lId: state.form.loginId,
+          lPw: state.form.loginPw,
+        }
+        axios.post("/api/account", args).then((res) => {
+          if(res.data === "only id match"){
+            
+            state.onlyIdMatch = true;
+            state.onlyPwMatch = false;
+            
+          }else if(res.data === "only pw match"){
+            
+            state.onlyIdMatch = false;
+            state.onlyPwMatch = true;
+            
+          }else{
+            state.account = res.data
+            state.realLoggedIn = true;
+            console.log(res.data);
+          }
+        }).catch(() => {
+          state.loggedIn = false;
+        })
+        
+      }
+
+      axios.get("api/account").then((res) => {
+        state.account = res.data
+        console.log(state.account.id, state.account.name)
+        alert("토큰값이 존재합니다.")
+        state.realLoggedIn = true;
+      });
+
+      return { state , submit};
     },
     name: 'SignUp',
     data() {
@@ -66,6 +115,9 @@
           this.check = false;
           alert('유효하지 않은 아이디 입니다.')
         }
+      },
+      goLogginedMap(){
+        this.$router.push("/Map");
       }
     },
     components: {
@@ -111,7 +163,9 @@
     width:50%;
     height: 46px;
     color:white;
-    line-height: 0;
+    line-height: 0.4;
+    justify-content: center;
+    text-align: center;
   }
 
   .regi{

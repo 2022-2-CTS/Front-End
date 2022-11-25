@@ -1,23 +1,22 @@
 <template>
-  <div>
   <div class="wrapper">
     <div class="body-regi">
         <h1 style="margin-top:0px">회원가입</h1>
         <label class="check-body" v-for="checkboxes in 3" :key="checkboxes">
           <Input class="checkbox-round" type="checkbox" />
           <span>
-            <button class="modal-button" @click="clickKey = checkboxes-1, console.log(clickKey), isModalViewed=true">
+            <button class="modal-button" @click="clickKey = checkboxes-1, console.log(clickKey), isModalViewed=true, console.log(isModalViewed)">
               {{checkList[checkboxes-1]}}
             </button>
           </span>
           <ModalView v-if="isModalViewed && clickKey == checkboxes-1" @close-modal="isModalViewed = false">
-            <div v-if="clickKey == 0" class="modal-scroll">
+            <div v-if="clickKey === 0">
               <PersonalDataAgree />
             </div>
-            <div v-if="clickKey == 1">
+            <div v-if="clickKey === 1">
               <LocationAgree />
             </div>
-            <div v-if="clickKey == 2">
+            <div v-if="clickKey === 2">
               <ADAgree />
             </div>
           </ModalView>
@@ -26,7 +25,7 @@
         <div class="input-id">
           <label for="Rid">아이디</label>
           <Form style="margin-top:10px">
-            <Input class="input-blank" type="text" v-model="value" @input="state.form.Rid = $event.target.value"></Input>
+            <Input class="input-blank" type="text" v-model="value" required @input="state.form.Rid = $event.target.value"></Input>
             <span class="input-button" @click="validateCheck">중복확인</span>
             <div class="validate-check" v-if="state.validate === true">사용할 수 있는 아이디 입니다.</div>
             <div class="validate-check" v-if="state.validate === false">사용할 수 없는 아이디 입니다.</div>
@@ -36,14 +35,14 @@
           <br/>
           <label for="Rpw">비밀번호</label>
           <Form style="margin-top:10px">
-            <Input type="text" class="input-blank-pw" v-model="value" @input="state.form.Rpw = $event.target.value, console.log(state.form.Rpw)"></Input>
+            <Input type="text" class="input-blank-pw" v-model="value" required @input="state.form.Rpw = $event.target.value, console.log(state.form.Rpw)"></Input>
           </Form>
         </div>
         <div class="input-pw">
           <br/>
           <label>비밀번호 확인</label>
           <Form style="margin-top:10px">
-            <Input type="text" class="input-blank-pw" v-model="value" @input="state.form.RpwCheck = $event.target.value, console.log(state.form.RpwCheck)">{{Equalcheck()}}</Input>
+            <Input type="text" class="input-blank-pw" v-model="value" required @input="state.form.RpwCheck = $event.target.value, console.log(state.form.RpwCheck)">{{Equalcheck()}}</Input>
             <div class="validate-check" v-if="state.pwEqCheck === true">비밀번호가 일치합니다.</div>
             <div class="validate-check" v-if="state.pwEqCheck === false">비밀번호가 일치하지 않습니다.</div>
           </Form>
@@ -51,32 +50,29 @@
         <div class="input-id">
           <label for="Rphone">휴대폰 번호</label>
           <Form style="margin-top:10px">
-            <Input type="text" class="input-blank" id="Rphone" v-model="value" @input="state.form.Rphone = $event.target.value"></Input>
-            <button class="input-button">인증요청</button>
-          </Form>
-        </div>
-        <div class="input-id">
-          <label>인증번호 입력</label>
-          <Form>
-            <Input class="input-blank" @input="cert = $event.target.value"></Input>
-            <button class="input-button" style="width:74px">확인</button>
+            <Input type="text" class="input-blank-pw" id="Rphone" v-model="value" required @input="state.form.Rphone = $event.target.value"></Input>
           </Form>
         </div>
         <div class="final-btn">
-          <button v-if="state.validate === true && state.pwEqCheck === true" class="final-button" @click="submit">가입 완료</button>
+          <button 
+            v-if="state.validate === true && 
+                  state.pwEqCheck === true&&
+                  state.form.Rid != ''&&
+                  state.form.Rpw != ''&&
+                  state.form.RpwCheck != ''&&
+                  state.form.Rphone != ''" class="final-button" @click="submit, goSignUp()" type="submit">가입 완료</button>
           <button v-else disabled="true" class="final-button" @click="submit">가입 완료</button>
         </div>
     </div>
   </div>
-</div>
   </template>
   
   <script>
 
-  import ModalView from "./ModalView.vue";
-  import ADAgree from "./ADAgree.vue";
-  import PersonalDataAgree from "./PersonalDataAgree.vue";
-  import LocationAgree from "./LocationAgree.vue";
+  import ModalView from "./ModalView";
+  import ADAgree from "./ADAgree";
+  import PersonalDataAgree from "./PersonalDataAgree";
+  import LocationAgree from "./LocationAgree";
   import {reactive} from "vue"; 
   import axios from "axios";
 
@@ -96,7 +92,7 @@
           Rphone: "",
         },
         validate: "true",
-        pwValidate : "true",
+        pwValidate : "false",
         pwEqCheck : "false",
       });
       console.log(state.form.Rid);
@@ -119,6 +115,7 @@
         const args = {
           Rid : state.form.Rid,
         };
+        console.log(args)
         axios.post("/api/check", args).then((res)=>{
           console.log(res.data);
           for(var i=0; i<res.data.length; i++){
@@ -147,10 +144,15 @@
 
       return {state, submit, validateCheck, Equalcheck}
     },
+    components: {
+    ModalView,
+    ADAgree,
+    PersonalDataAgree,
+    LocationAgree
+    },
     data() {
         return {
           checkList : ['개인정보 수집 및 이용 동의', '위치 정보 수집 동의', '광고성 수신 동의'],
-          validate: false,
           clickKey: 0,
           isModalViewed: false,         
         }
@@ -163,12 +165,6 @@
         this.$router.push('/')
       },
     },
-    components: {
-    ModalView,
-    ADAgree,
-    PersonalDataAgree,
-    LocationAgree
-}
   }
   </script>
   
