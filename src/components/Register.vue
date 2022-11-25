@@ -104,7 +104,8 @@
                   state.form.Rid != ''&&
                   state.form.Rpw != ''&&
                   state.form.RpwCheck != ''&&
-                  state.form.Rphone != ''" class="final-button" @click="submit">가입 완료</button>
+                  state.form.Rphone != ''&&
+                  state.registered === false" class="final-button" @click="submit">가입 완료</button>
           <button v-else disabled="true" class="final-button" @click="submit">가입 완료</button>
         </div>
     </div>
@@ -197,9 +198,9 @@
     },
     methods:{
       goSignUp(){
-        if(this.state.registered){
+        
           this.$router.push('/')
-        }
+        
       },
     },
     components: {}
