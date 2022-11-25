@@ -65,21 +65,10 @@
           lPw: state.form.loginPw,
         }
         axios.post("/api/account", args).then((res) => {
-          if(res.data === "only id match"){
-            
-            state.onlyIdMatch = true;
-            state.onlyPwMatch = false;
-            
-          }else if(res.data === "only pw match"){
-            
-            state.onlyIdMatch = false;
-            state.onlyPwMatch = true;
-            
-          }else{
-            state.account = res.data
-            state.realLoggedIn = true;
-            console.log(res.data);
-          }
+          state.account = res.data
+          state.realLoggedIn = true;
+          console.log(res.data);
+          
         }).catch(() => {
           state.loggedIn = false;
         })
