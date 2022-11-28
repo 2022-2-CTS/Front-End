@@ -96,6 +96,9 @@ export default {
       // 현재 페이지 : map (1)
       nowPage: 1,
       playdata:[],
+      concertdata:[],
+      musicaldata:[],
+      exhibitdata:[],
     }
   },
   components: {
@@ -174,6 +177,18 @@ export default {
       axios.get('/get/play').then((res)=>{
         this.playdata=res.data;
         console.log(this.playdata);
+      })
+      axios.get('/get/concert').then((res)=>{
+        this.concertdata=res.data;
+        console.log(this.concertdata);
+      })
+      axios.get('/get/musical').then((res)=>{
+        this.musicaldata=res.data;
+        console.log(this.musicaldata);
+      })
+      axios.get('/get/play').then((res)=>{
+        this.exhibitdata=res.data;
+        console.log(this.exhibitdata);
       })
     }
   }
