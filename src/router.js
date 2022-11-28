@@ -9,6 +9,7 @@ import InfoPost from '@/components/InfoPost.vue';
 import InfoTogether from '@/components/InfoTogether.vue';
 import MyPage from '@/components/MyPage.vue';
 import Info from '@/components/Info.vue';
+import test from '@/components/test.vue';
 
 const routes = [
     {
@@ -54,6 +55,10 @@ const routes = [
     {
       path: "/mypage",
       component: MyPage,
+    },
+    {
+      path: "/test",
+      component: test,
     }
   ];
   

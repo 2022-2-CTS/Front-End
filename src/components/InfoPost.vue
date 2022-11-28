@@ -70,7 +70,7 @@ export default {
   methods: {
     writeEnd() {
       console.log(this.inputData)
-      axios.post('/api/post-push', this.inputData).then(() => {
+      axios.post('/api/board/upload', this.inputData).then(() => {
         console.log("post push");
       }).catch(err => {
         alert(err);

@@ -40,7 +40,7 @@ export default {
     BottomNav: BottomNav,
   },
   created() {
-    axios.get("/api/post-get").then((response) => { 
+    axios.get("/api/board/").then((response) => { 
       console.log("post get");
       console.log(response.data);
       this.postData = response.data;
