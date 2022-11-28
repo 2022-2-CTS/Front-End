@@ -95,6 +95,7 @@ export default {
       responseData: "",
       // 현재 페이지 : map (1)
       nowPage: 1,
+      playdata:[],
     }
   },
   components: {
@@ -163,13 +164,17 @@ export default {
       console.log("맵을 불러왔어!");
     },
     request() {
-      axios.get('/api/test').then((response) => {
-        this.responseData = response.data;
-        console.log("데이터를 받아왔어!");
-      }).catch(err => {
-        alert(err);
-        console.log(err);
-      });
+      // axios.get('/api/test').then((response) => {
+      //   this.responseData = response.data;
+      //   console.log("데이터를 받아왔어!");
+      // }).catch(err => {
+      //   alert(err);
+      //   console.log(err);
+      // });
+      axios.get('/get/play').then((res)=>{
+        this.playdata=res.data;
+        console.log(this.playdata);
+      })
     }
   }
 }
