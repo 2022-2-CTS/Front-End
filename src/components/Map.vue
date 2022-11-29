@@ -105,9 +105,6 @@ export default {
     BottomNav: BottomNav,
   },
   mounted() {
-    // this.getMarkerData(); // 단말 데이터 불러오기
-    // this.getData(); // 기상 데이터 불러오기
-
     // window 객체에 kakao가 등록되어있는지 확인하고, 없을 때만 로딩
     if (!window.kakao || !window.kakao.maps) {
       // script 태그 객체 생성
@@ -128,6 +125,9 @@ export default {
       console.log("이미 로딩됨 : ", window.kakao);
       this.initMap();
     }
+  },
+  created() {
+    this.request();
   },
   methods: {
     // 맵 생성
@@ -174,19 +174,19 @@ export default {
       //   alert(err);
       //   console.log(err);
       // });
-      axios.get('/get/play').then((res)=>{
+      axios.get('/api/data/play').then((res)=>{
         this.playdata=res.data;
         console.log(this.playdata);
       })
-      axios.get('/get/concert').then((res)=>{
+      axios.get('/api/data/concert').then((res)=>{
         this.concertdata=res.data;
         console.log(this.concertdata);
       })
-      axios.get('/get/musical').then((res)=>{
+      axios.get('/api/data/musical').then((res)=>{
         this.musicaldata=res.data;
         console.log(this.musicaldata);
       })
-      axios.get('/get/play').then((res)=>{
+      axios.get('/api/data/play').then((res)=>{
         this.exhibitdata=res.data;
         console.log(this.exhibitdata);
       })
