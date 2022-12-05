@@ -10,6 +10,7 @@ import InfoTogether from '@/components/InfoTogether.vue';
 import MyPage from '@/components/MyPage.vue';
 import Info from '@/components/Info.vue';
 import test from '@/components/test.vue';
+import Chatting from '@/components/Chatting.vue';
 
 const routes = [
     {
@@ -59,6 +60,10 @@ const routes = [
     {
       path: "/test",
       component: test,
+    },
+    {
+      path: "/chat",
+      component: Chatting,
     }
   ];
   
