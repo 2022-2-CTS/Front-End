@@ -11,6 +11,7 @@ import MyPage from '@/components/MyPage.vue';
 import Info from '@/components/Info.vue';
 import test from '@/components/test.vue';
 import Chatting from '@/components/Chatting.vue';
+import InfoPostTogether from '@/components/infoPostTogether.vue';
 
 const routes = [
     {
@@ -64,6 +65,10 @@ const routes = [
     {
       path: "/chat",
       component: Chatting,
+    },
+    {
+      path: "/info/post/together",
+      component: InfoPostTogether,
     }
   ];
   
