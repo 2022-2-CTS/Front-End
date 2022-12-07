@@ -6,10 +6,10 @@
         <div style="margin-bottom:20px">
           {{ postData[i].title }}
           <div class="date-button">
-            <span v-if="( postData[i].tag==0)">지금당장</span>
-            <span v-if="( postData[i].tag==1)">어제 갔다왔음</span>
-            <span v-if="( postData[i].tag==2)">오늘 하더라</span>
-            <span v-if="( postData[i].tag==3)">내일도 한대</span>
+            <spna v-if="( postData[i].tag==0)">지금당장</spna>
+            <spna v-if="( postData[i].tag==1)">어제 갔다왔음</spna>
+            <spna v-if="( postData[i].tag==2)">오늘 하더라</spna>
+            <spna v-if="( postData[i].tag==3)">내일도 한대</spna>
           </div>
         </div>
         <div class="info-map" style="margin-bottom:20px">
