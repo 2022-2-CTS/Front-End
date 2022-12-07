@@ -6,8 +6,9 @@
         <div style="margin-bottom:20px">
           {{ postData[i].title }}
           <div class="date-button">
-            <spna v-if="( postData[i].tag==0)">지금당장</spna>
-            <spna v-if="( postData[i].tag==1)">어제 갔다왔음</spna>
+            <div class="catered"/>
+            <span v-if="( postData[i].tag==0)">지금당장</span>
+            <spna v-if="( postData[i].tag==1)" style="display: inline-block" >어제 갔다왔음</spna>
             <spna v-if="( postData[i].tag==2)">오늘 하더라</spna>
             <spna v-if="( postData[i].tag==3)">내일도 한대</spna>
           </div>

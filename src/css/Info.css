@@ -181,3 +181,35 @@
     -ms-transform: translateX(20px);
     transform: translateX(20px);
 }
+
+
+.catered {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 5px;
+    background-color: #FF0000;
+    display: inline-block;
+}
+.cateblue {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 5px;
+    background-color: #000AFF;
+    display: inline-block;
+}
+.categreen {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 5px;
+    background-color: #5CC637;
+}
+.cateyellow {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 5px;
+    background-color: #FFB800;
+}
