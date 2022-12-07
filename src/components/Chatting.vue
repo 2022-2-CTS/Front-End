@@ -29,9 +29,9 @@
         <div class="chat-room" style="background: #2f3f67; border-radius: 10px">
           <ul class="list-group chat-content">
             <div v-for="List in state.chattingList" :key="List">
-              <li>
-                <span class="chat-box">{{ List.content }}</span>
-              </li>
+              
+                <div class="chat-box">{{List.userid}} {{ List.content }}</div>
+              
             </div>
             <div id="content">
             </div>
@@ -165,9 +165,9 @@ export default {
         chatIO.emit(state.title, chatData);
         console.log(chatData);
       }
-      // axios.post("api/message", chatData).then(() => {
-      //   console.log("전송성공");
-      // });
+      axios.post("api/message", chatData).then(() => {
+        console.log("전송성공");
+      });
       console.log(realTime);
     };
 
