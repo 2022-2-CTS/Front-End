@@ -113,12 +113,31 @@ export default {
       concertData: [],
       musicalData: [],
       exhibitData: [],
+
+      // 행사 데이터 장소 4종류
+      playLocation: [],
+      concertLocation: [],
+      musicalLocation: [],
+      exhibitLocation: [],
+
+      // 행사 데이터 4종류 (세부)
+      /*
+        json : [
+          { 주소 : data },
+          { 주소 : data },
+          ...
+        ]
+      */
+      playDataInData : [],
+      concertDataInData : [],
+      musicalDataInData : [],
+      exhibitDataInData : [],
     }
   },
   components: {
     BottomNav: BottomNav,
   },
-  mounted : async function() {
+  mounted: async function () {
     // window 객체에 kakao가 등록되어있는지 확인하고, 없을 때만 로딩
     if (!window.kakao || !window.kakao.maps) {
       // script 태그 객체 생성
@@ -147,9 +166,65 @@ export default {
   },
   methods: {
     // 맵 생성
-    initMap : async function() {
-      this.request();
-      // 맵 생성
+    initMap: async function () {
+      // 데이터 종류에 따라 마커 그리는 함수
+      function drawMarker(nowObject, nowObjectLength, map, locationArr, dataArr) {
+
+        // 주소-좌표 변환 객체 생성
+        const geocoder = new kakao.maps.services.Geocoder();
+
+        console.log("장소 개수 : " + Object.keys(nowObject).length);
+
+        // 장소의 개수만큼 반복
+        for (var i = 0; i < nowObjectLength; i++) {
+          var locationLength = Object.keys(nowObject[i][i]).length;
+          console.log("데이터 개수 : " + locationLength);
+          //console.log(i + " : " + JSON.stringify(nowObject[i]));
+          var positionData = nowObject[i][i];
+          
+          // 장소 객체 속 데이터의 개수만큼 반복
+          for (var j = 0; j < locationLength; j++) {
+            var locationData = positionData[j].data.location;
+            //console.log(j + " : " + JSON.stringify(locationData));
+
+            // 현재 데이터의 장소가 이미 장소 배열에 존재함
+            if (locationArr.includes(locationData)) {
+              //console.log(locationArr.length - 1 + "번째 배열에 데이터 넣는 중");
+              dataArr[locationArr.length - 1].push(positionData[j].data);
+              continue;
+            }
+            // 현재 데이터의 장소가 장소 배열에 존재하지 않음
+            else {
+              // 장소 배열에 현재 데이터의 장소 추가
+              locationArr.push(locationData);
+              //console.log(locationArr.length + "번째 배열 생성");
+              // 현재 데이터의 장소의 배열 추가
+              dataArr.push([]);
+              dataArr[locationArr.length - 1].push(positionData[j].data);
+            }
+
+            // 주소로 좌표를 검색
+            geocoder.addressSearch(locationData, (result, status) => {
+              var coords;
+              // 정상적으로 검색이 완료됐으면 
+              if (status === kakao.maps.services.Status.OK) {
+                //console.log(result);
+                coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+                //console.log(coords);
+                // 결과값으로 받은 위치를 마커로 표시
+                var marker = new kakao.maps.Marker({
+                  map: map,
+                  position: coords
+                });
+
+                marker.setMap(map);
+              }
+            });
+          }
+        }
+      }
+
       if (this.map == null) {
         const container = document.getElementById("map");
         const options = {
@@ -179,52 +254,34 @@ export default {
 
       });
 
-      // 주소-좌표 변환 객체를 생성합니다
-      const geocoder = new kakao.maps.services.Geocoder();
-      //var nowLocation;
-
-      //console.log(this.playData);
-      console.log(Object.keys(this.playData).length);
-
-      var positionLength = Object.keys(this.playData).length;
+      // 데이터 종류별 객체의 길이
+      var playLength = Object.keys(this.playData).length;
+      var concertLength = Object.keys(this.concertData).length;
+      var musicalLength = Object.keys(this.musicalData).length;
+      var exhibitLength = Object.keys(this.exhibitData).length;
       var callMap = this.map; // 콜백함수 내에서 쓸 map 복사본(?)
 
-      // 주소로 좌표를 검색
-      for (var i = 0; i < positionLength; i++) {
-        var locationLength = Object.keys(this.playData[i]).length;
-        //console.log(locationLength);
-        //console.log(i + " : " + JSON.stringify(this.playData[i]));
-        var positionData = this.playData[i];
-        for (var j = 0; j < locationLength - 1; j++) {
-          var locationData = positionData[i][j].data.location;
-          //console.log(j + " : " + JSON.stringify(locationData));
-          geocoder.addressSearch(locationData, (result, status) => {
-            
-            var coords;
-            var map = callMap;
-            // 정상적으로 검색이 완료됐으면 
-            if (status === kakao.maps.services.Status.OK) {
-              //console.log(result);
-              coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+      drawMarker(this.playData, playLength, callMap, this.playLocation, this.playDataInData);
+      console.log(this.playLocation);
+      console.log(this.playDataInData);
 
-              //console.log(coords);
-              // 결과값으로 받은 위치를 마커로 표시합니다
-              var marker = new kakao.maps.Marker({
-                map: map,
-                position: coords
-              });
+      drawMarker(this.concertData, concertLength, callMap, this.concertLocation, this.concertDataInData);
+      console.log(this.concertLocation);
+      console.log(this.concertDataInData);
 
-              marker.setMap(map);
-            }
-          });
-        }
-      }
+      drawMarker(this.musicalData, musicalLength, callMap, this.musicalLocation, this.musicalDataInData);
+      console.log(this.musicalLocation);
+      console.log(this.musicalDataInData);
+
+      drawMarker(this.exhibitData, exhibitLength, callMap, this.exhibitLocation, this.exhibitDataInData);
+      console.log(this.exhibitLocation);
+      console.log(this.exhibitDataInData);
 
 
 
       console.log("맵을 불러왔어!");
     },
-    request : async function() {
+    request: async function () {
       // axios.get('/api/testtData').then((response) => {
       //   this.responseData = response.data;
       //   console.log("데이터를 받아왔어!");
