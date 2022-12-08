@@ -1,5 +1,7 @@
 <template>
-  <div class="chat-title">채팅</div>
+  <div class="chat-title">채팅
+    <button class="info-map-icon" style="width:30px; height:30px" @click="this.$router.go()"></button>
+  </div>
   <hr />
   <div class="container p-4 detail">
     <div class="row">
@@ -9,10 +11,16 @@
             class="list-group-item"
             v-for="list in state.chatList"
             :key="list.title"
-            @click="click_title(list.title)"
+            @click="click_title(list._id, list.yid)"
           >
-            <h6>{{ list.title }}</h6>
-            <h6 class="text-small">{{ list.title }}님과의 채팅입니다.</h6>
+            <div v-if="state.my_id == list.yid">
+              <h6>{{ list.mid }}</h6>
+              <h6 class="text-small">{{ list.mid }}님과의 채팅입니다.</h6>
+            </div>
+            <div v-if="state.my_id == list.mid">
+              <h6>{{ list.yid }}</h6>
+              <h6 class="text-small">{{ list.yid }}님과의 채팅입니다.</h6>
+            </div>
           </li>
         </ul>
       </div>
@@ -21,12 +29,11 @@
         <div class="chat-room" style="background: #2f3f67; border-radius: 10px">
           <ul class="list-group chat-content">
             <div v-for="List in state.chattingList" :key="List">
-              <li v-if="List.userid === state.you_id">
-                <span class="chat-box">{{ List.content }}</span>
-              </li>
-              <li v-if="List.userid === state.my_id">
-                <span class="chat-box mine">{{ List.content }}</span>
-              </li>
+              
+                <div class="chat-box">{{List.userid}} {{ List.content }}</div>
+              
+            </div>
+            <div id="content">
             </div>
           </ul>
           <div class="input-group">
@@ -50,21 +57,28 @@
 import { reactive } from "vue";
 import axios from "axios";
 import io from "socket.io-client";
+import $ from 'jquery';
 
 export default {
   setup() {
     const state = reactive({
       chatList: [{}],
-      my_id: "cts",
+      my_id: localStorage.getItem('my_id'),
       you_id: "",
       content: "",
       title: "",
       myChat: {},
       youChat: {},
       chattingList: [{}],
-      realTime:"",
       isConnected:false,
+      instance : 0,
     });
+
+    const realTime = [{}];
+
+    const reload = () => {
+      this.$router.go(this.$router.currentRoute)
+    }
 
     const chatIO = io("localhost:3000", {
       origins: "*:*",
@@ -77,7 +91,7 @@ export default {
       console.log(res.data);
       for (var i = 0; i < res.data.length; i++) {
         console.log(res.data[i]);
-        if (res.data[i].mid == state.my_id) {
+        if (res.data[i].mid == state.my_id || res.data[i].yid == state.my_id) {
           state.chatList[i] = res.data[i];
           console.log(state.chatList[i]);
         }
@@ -86,8 +100,20 @@ export default {
 
     var eventsource;
 
-    const click_title = (title) => {
+    const click_title = (title, yid) => {
       state.title = title;
+      state.you_id = yid;
+      console.log(state.you_id);
+      const args ={
+        title_ : title,
+      }
+      axios.post('/api/chatroom', args).then((res) =>{
+        console.log(res);
+      })
+
+      chatIO.emit(title);
+
+      console.log('title이에용' + title);
 
       if (eventsource != undefined) {
         eventsource.close();
@@ -102,7 +128,7 @@ export default {
         console.log(list.length);
         for (var i = 0; i < list.length; i++) {
           console.log(state.my_id);
-          console.log(list[i].userid);
+          console.log('userid = ' + list[i].userid);
           if (list[i].userid == state.my_id) {
             console.log(list[i].content);
             state.myChat[i] = list[i];
@@ -127,6 +153,7 @@ export default {
 
     const send = () => {
       console.log("메세지 전송");
+      console.log(state.content);
       const chatData = {
         parent: state.title,
         content: state.content,
@@ -134,20 +161,23 @@ export default {
       };
       if(state.isConnected == true){
         console.log("HELLO!!");
-        chatIO.emit("chat message", chatData);
+        console.log(state.title);
+        chatIO.emit(state.title, chatData);
+        console.log(chatData);
       }
       axios.post("api/message", chatData).then(() => {
         console.log("전송성공");
       });
+      console.log(realTime);
     };
 
     chatIO.on("broadcast message", function (msg) {
       console.log("message: " + msg);
-      state.realTime = msg;
-      console.log(state.realTime.userid);
+      realTime.push(msg);
+      $('#content').append('<div class="chat-box">'+ msg.userid + '    ' + msg.content + '<div>');
     });
 
-    return { state, send, click_title };
+    return { state, send, click_title, realTime, reload};
   },
 };
 </script>
@@ -179,7 +209,8 @@ export default {
   background: #eee;
   padding: 5px;
   border-radius: 5px;
-  float: left;
+  margin-bottom: 10px;
+  margin-left: 5px;
 }
 .mine {
   float: right;
