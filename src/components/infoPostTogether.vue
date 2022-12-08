@@ -71,7 +71,7 @@
       writeEnd() {
         console.log(this.inputData)
         axios.post('/api/together/upload', this.inputData).then(() => {
-          console.log("together push");
+          console.log("post push");
         }).catch(err => {
           alert(err);
           console.log(err);
