@@ -118,7 +118,7 @@ export default {
   components: {
     BottomNav: BottomNav,
   },
-  mounted() {
+  mounted : async function() {
     // window 객체에 kakao가 등록되어있는지 확인하고, 없을 때만 로딩
     if (!window.kakao || !window.kakao.maps) {
       // script 태그 객체 생성
@@ -137,7 +137,9 @@ export default {
     }
     else {
       console.log("이미 로딩됨 : ", window.kakao);
-      this.initMap();
+      // 앗 큰일이다... 로딩 화면을 만들어야하나?
+      await this.request();
+      await this.initMap();
     }
   },
   created() {
@@ -145,7 +147,8 @@ export default {
   },
   methods: {
     // 맵 생성
-    initMap() {
+    initMap : async function() {
+      this.request();
       // 맵 생성
       if (this.map == null) {
         const container = document.getElementById("map");
@@ -203,9 +206,8 @@ export default {
             if (status === kakao.maps.services.Status.OK) {
               //console.log(result);
               coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-              //console.log(coords);
 
-              console.log(coords);
+              //console.log(coords);
               // 결과값으로 받은 위치를 마커로 표시합니다
               var marker = new kakao.maps.Marker({
                 map: map,
@@ -222,7 +224,7 @@ export default {
 
       console.log("맵을 불러왔어!");
     },
-    request() {
+    request : async function() {
       // axios.get('/api/testtData').then((response) => {
       //   this.responseData = response.data;
       //   console.log("데이터를 받아왔어!");
@@ -230,19 +232,19 @@ export default {
       //   alert(err);
       //   console.log(err);
       // });
-      axios.get('/api/data/play').then((res) => {
+      await axios.get('/api/data/play').then((res) => {
         this.playData = res.data;
         //console.log(this.playData);
       })
-      axios.get('/api/data/concert').then((res) => {
+      await axios.get('/api/data/concert').then((res) => {
         this.concertData = res.data;
         //console.log(this.concertData);
       })
-      axios.get('/api/data/musical').then((res) => {
+      await axios.get('/api/data/musical').then((res) => {
         this.musicalData = res.data;
         //console.log(this.musicalData);
       })
-      axios.get('/api/data/play').then((res) => {
+      await axios.get('/api/data/play').then((res) => {
         this.exhibitData = res.data;
         //console.log(this.exhibitData);
       })
