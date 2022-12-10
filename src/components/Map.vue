@@ -1,4 +1,5 @@
 <template>
+  <div>
   <BottomNav :nowPage="nowPage"></BottomNav>
 
   <!-- 로딩 스피너 -->
@@ -87,6 +88,7 @@
       </div>
     </div>
 
+  </div>
   </div>
 </template>
   
