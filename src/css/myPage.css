@@ -4,7 +4,7 @@
     font-size: 25px;
     padding: auto;
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: -0.3rem;
 }
 .post-display{
     width: 90%;
@@ -12,7 +12,7 @@
     margin-top: 3%;
 }
 .post-disinput{
-    border: 1px solid #D9D9D9;
+    border: 1px solid #746767;
     border-radius: 30px;
     width:65%;
     height: 2rem;
@@ -22,6 +22,7 @@
     margin-bottom: 30px;
     background-color: black;
     opacity: 20%;
+    padding: 20px;
 }
 .post-input{
     border: 1px solid #D9D9D9;
@@ -32,43 +33,47 @@
     /* margin-left: 50px; */
     display: inline-block;
     margin-bottom: 30px;
+    padding: 20px;
 }
 .my-info{
     float: left;
     margin-right: 5%;
     width: 30%;
+    margin-top: 8px;
 }
 .w-button{
     background-color: #E37A39;
     border: 1px solid  #E37A39;
     border-radius: 15px;
     width: 100px;
-    height:20px;
+    height: 30px;
     text-align: center;
-    display: inline-block;
+    /* display: inline-block; */
     float: right;
     padding-top: auto;
-    padding-bottom: 25px;
+    padding-bottom: 20px;
     color: white;
 }
 .fav-card{
     border-radius: 7px;
     width: 90%;
-    height: 3rem;
+    height: 4rem;
     margin:auto;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     margin-top: 20px;
-    background-color: #D9D9D9;
+    background-color: rgba(217, 217, 217, 0.4);
     text-align: left;
+    padding: 10px;
 }
 .fav-card-title{
     font-size: 1.4rem;
     float: left;
     margin-left: 10px;
     margin-top: 0.3rem;
+    font-weight: 600;
 }
 .fav-icon{
     float: right;
-    margin-top: 0.6rem;
+    /* margin-top: 0.6rem; */
     margin-right: 1rem;
 }

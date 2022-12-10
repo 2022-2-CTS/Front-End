@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="chat-title">채팅
     <button class="info-map-icon" style="width:30px; height:30px" @click="this.$router.go()"></button>
   </div>
@@ -6,44 +7,46 @@
   <div class="container p-4 detail">
     <div class="row">
       <div class="col-3">
-        <ul class="list-group chat-list">
+        <ul>
           <li
             class="list-group-item"
             v-for="list in state.chatList"
             :key="list.title"
             @click="click_title(list._id, list.yid)"
           >
-            <div v-if="state.my_id == list.yid">
+            <div v-if="state.my_id == list.yid" class="chat-list">
               <h6>{{ list.mid }}</h6>
-              <h6 class="text-small">{{ list.mid }}님과의 채팅입니다.</h6>
             </div>
-            <div v-if="state.my_id == list.mid">
+            <div v-if="state.my_id == list.mid" class="chat-list">
               <h6>{{ list.yid }}</h6>
-              <h6 class="text-small">{{ list.yid }}님과의 채팅입니다.</h6>
             </div>
           </li>
         </ul>
       </div>
 
       <div class="col-9 p-0">
-        <div class="chat-room" style="background: #2f3f67; border-radius: 10px">
+        <div class="chat-room" style="background: #2f3f67; border-radius: 20px">
           <ul class="list-group chat-content">
             <div v-for="List in state.chattingList" :key="List">
               
-                <div class="chat-box">{{List.userid}} {{ List.content }}</div>
+                <div class="chat-box">
+                  <h4>{{List.userid}}</h4> 
+                  {{ List.content }}
+                </div>
               
             </div>
             <div id="content">
             </div>
           </ul>
-          <div class="input-group">
+          <div class="input-group" style="background: rgba( 255, 255, 255, 0 );">
             <input
               class="form-control"
               id="chat-input"
               v-model="value"
               @input="state.content = $event.target.value"
+              style="border:3px solid rgba( 255, 255, 255, 0 ); border-radius: 0px 0px 0px 20px; padding:10px"
             />
-            <button class="btn btn-secondary" id="send" @click="send()">
+            <button class="btn btn-secondary" id="send" @click="send()" style="border:0px; background:rgba( 255, 255, 255, 0 )">
               전송
             </button>
           </div>
@@ -51,6 +54,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -183,6 +187,18 @@ export default {
 </script>
 
 <style>
+
+.chat-list{
+  background: rgb(227, 112, 57);
+  border-radius: 15px;
+  padding:10px;
+  padding-top:17px;
+  margin-bottom:5px;
+  color:white;
+  text-align: center;
+  justify-content: center;
+}
+
 .chat-title {
   height: 3rem;
   text-align: center;
@@ -206,11 +222,16 @@ export default {
   margin-bottom: 0;
 }
 .chat-box {
-  background: #eee;
-  padding: 5px;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  margin-left: 5px;
+  background: white;
+  padding-bottom: 20px;
+  border-radius: 20px;
+  padding-left: 20px;
+  padding-top:13px;
+  margin-left: 15px;
+  margin-right: 6px;
+  margin-top:20px;
+  color:black;
+  border:3px solid #2f3f67;
 }
 .mine {
   float: right;
