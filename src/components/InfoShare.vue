@@ -15,7 +15,7 @@
             </div>
 
             <div v-if="postData[i].tag == 1">
-              <div class="map-category-circle map-category-circle-blue" style="float: left; margin-top: 8px; margin-left: 10px; margin-right: -3px;"> </div>
+              <div class="map-category-circle map-category-circle-blue" style="float: left; margin-top: 8px; margin-left: 8px; margin-right: -3px;"> </div>
               <span>어제 갔다왔음</span>
             </div>
 

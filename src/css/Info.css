@@ -22,6 +22,7 @@
     border-radius: 10px;
     text-align: center;
     margin-right: 5%;
+    margin-top: -3px;
 }
 .info-card{
     width: 90%;
@@ -43,8 +44,10 @@
     float: right;
     margin-right: 20px;
     padding-top: auto;
-    padding-bottom: 25px;
+    padding-top: 2px;
+    padding-bottom: 27px;
     color: white;
+    margin-right: 0px;
 }
 .switch-text{
     font-size: 16px;
@@ -54,7 +57,7 @@
 }
 
 .date-button{
-    border: 1px solid  #E37A39;
+    border: 1px solid  #D9D9D9;
     border-radius: 15px;
     width: 130px;
     height:20px;
@@ -62,7 +65,8 @@
     text-align: center;
     float: right;
     /* margin-right: 20px; */
-    padding-bottom: 25px;
+    padding: 2px;
+    padding-bottom: 27px;
     margin-top: 7px;
 }
 .info-map{
