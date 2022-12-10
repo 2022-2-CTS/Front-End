@@ -80,14 +80,14 @@
           <br/>
           <label for="Rpw">비밀번호</label>
           <Form style="margin-top:10px">
-            <Input type="text" class="input-blank-pw" v-model="value" @input="state.form.Rpw = $event.target.value, console.log(state.form.Rpw)"></Input>
+            <Input type="password" class="input-blank-pw" v-model="value" @input="state.form.Rpw = $event.target.value, console.log(state.form.Rpw)"></Input>
           </Form>
         </div>
         <div class="input-pw">
           <br/>
           <label>비밀번호 확인</label>
           <Form style="margin-top:10px">
-            <Input type="text" class="input-blank-pw" v-model="value" @input="state.form.RpwCheck = $event.target.value, console.log(state.form.RpwCheck)">{{Equalcheck()}}</Input>
+            <Input type="password" class="input-blank-pw" v-model="value" @input="state.form.RpwCheck = $event.target.value, console.log(state.form.RpwCheck)">{{Equalcheck()}}</Input>
             <div class="validate-check" v-if="state.pwEqCheck === true">비밀번호가 일치합니다.</div>
             <div class="validate-check" v-if="state.pwEqCheck === false">비밀번호가 일치하지 않습니다.</div>
           </Form>

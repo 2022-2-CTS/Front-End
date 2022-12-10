@@ -14,8 +14,19 @@
             </Input>
           </FormItem>
           <FormItem>
-            <Input class="login" type="text" v-model="value" placeholder="비밀번호" @input="state.form.loginPw = $event.target.value">
-            </Input>
+            <div class="field has-addons">
+            <div class="control is-expanded">
+              <input v-if="showPassword" type="text" class="login" placeholder="비밀번호" v-model="value" @input="state.form.loginPw = $event.target.value"/>
+              <input v-else type="password" class="login" placeholder="비밀번호" v-model="value" @input="state.form.loginPw = $event.target.value"/>
+            </div>
+              <div class="control">
+                <div class="button" @click="toggleShow" style="margin-left: 100px;">
+                  <span class="icon is-small is-right">
+                    <div>비밀번호 표시</div>
+                  </span>
+                </div>
+              </div>
+            </div>
           </FormItem>
           <div class="login-button" @click="submit()">
             로그인
@@ -91,9 +102,14 @@
           id:'',
           pw:'',
           check: '',
+          showPassword: false,
+          password: null
         }
     },
     methods:{
+      toggleShow() {
+        this.showPassword = !this.showPassword;
+      },
       goRegister(){
         this.$router.push("/register");
       },
@@ -110,12 +126,16 @@
         this.$router.push("/Map");
       }
     },
-    components: {
-}
+    computed: {
+      buttonLabel() {
+        return (this.showPassword) ? "Hide" : "Show";
+      }
+    },
   }
   </script>
   
   <style>
+  
 
   .body-sign{
     place-items:center;
