@@ -35,7 +35,7 @@ const routes = [
       component: Map,
     },
     {
-      path: "/map/detail/:id",
+      path: "/map/detail",
       component: Detail,
     },
     {

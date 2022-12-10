@@ -27,10 +27,10 @@
     width: 90%;
     margin:auto;
     margin-bottom: 40px;
-    margin-top: 20px;
 }
 .info-card-title{
-    font-size: 1rem;
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 .toget-button{
     background-color: #E37A39;
@@ -56,13 +56,14 @@
 .date-button{
     border: 1px solid  #E37A39;
     border-radius: 15px;
-    width: 120px;
+    width: 130px;
     height:20px;
     display: inline-block;
     text-align: center;
     float: right;
-    margin-right: 20px;
+    /* margin-right: 20px; */
     padding-bottom: 25px;
+    margin-top: 7px;
 }
 .info-map{
     width: 100%;

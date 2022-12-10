@@ -7,12 +7,12 @@
 
     <!-- 행사 포스터 -->
     <div class="map-detail-poster">
-        
+      <img :src='viewData.imgSrc' style="width: 50%;" />
     </div>
 
     <!-- 행사 제목 -->
     <div class="map-detail-event-title">
-      {{$route.params.id}}번째 행사
+      {{ viewData.title }}
     </div>
 
     <!-- 정보 container -->
@@ -22,7 +22,7 @@
         <li>
           기간
           <div class="map-detail-info-content-of-content">
-            2022 . 10 . 9 ~ 2022 . 11 . 9 
+            {{ viewData.op_st_dt }} ~ {{ viewData.op_ed_dt }}
           </div>
         </li>
 
@@ -30,7 +30,7 @@
         <li>
           관람 회차
           <div class="map-detail-info-content-of-content">
-            11:00 , 12:00 , 17:00 , 18:00  
+            {{ viewData.showtime }}
           </div>
         </li>
 
@@ -38,7 +38,7 @@
         <li>
           가격
           <div class="map-detail-info-content-of-content">
-            A석 20000원, R석 40000원  
+            {{ viewData.price }}
           </div>
         </li>
       </ul>
@@ -52,12 +52,15 @@
     name: 'Detail',
     data() {
         return {
-
+          viewData : this.$route.query
         }
     },
     components: {
         
-    }
+    },
+    created() {
+      console.log(JSON.stringify(this.$route.query));
+    },
   }
   </script>
   

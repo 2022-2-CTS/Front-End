@@ -5,6 +5,7 @@
         <img :src="require('@/img/now_position_icon.svg')" style="width: 38px; height: 38px; padding-top: 5px;" />
       </div>
     </div>
+    <hr/>
 
     <div style="margin-bottom:20px">
       <label class="switch-button">
@@ -14,6 +15,7 @@
         <span v-if="infoshare" class="switch-text">정보공유</span>
         <span v-if="!infoshare" class="switch-text">같이고고</span>
     </div>
+
 
   <div v-if="infoshare"><Infoshare/></div>
   <div v-else><InfoTogether/></div>
