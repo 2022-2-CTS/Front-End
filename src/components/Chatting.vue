@@ -1,7 +1,9 @@
 <template>
 <div>
-  <div class="chat-title">채팅
-    <button class="info-map-icon" style="width:30px; height:30px" @click="this.$router.go()"></button>
+  <button style="width:auto; height:30px; margin-top: 5px; float:left; margin-left: 10px;" @click="this.$router.go(-1)">back</button>
+  <button style="width:auto; height:30px; margin-top: 5px; float:right;margin-right: 10px;" @click="this.$router.go()">reload</button>
+  <div class="chat-title">
+    채팅
   </div>
   <hr />
   <div class="container p-4 detail">
@@ -185,6 +187,9 @@ export default {
 
     return { state, send, click_title, realTime, reload};
   },
+  components:{
+    
+  }
 };
 </script>
 
@@ -208,6 +213,7 @@ export default {
   padding: auto;
   margin-top: 1rem;
   margin-left: 3rem;
+  margin-right: 3rem
 }
 .chat-content {
   height: 450px;
