@@ -50,7 +50,7 @@
     margin-right: 0px;
 }
 .switch-text{
-    font-size: 16px;
+    font-size: 15px;
     /* display: inline-block; */
     margin-bottom: 25px;
     margin-left: 10px;
@@ -78,7 +78,7 @@
     display: inline-block;
     margin-left: 5%;
     width: 40px;
-    height: 20px;
+    height: 22px;
 }
 
 .post-title{
@@ -166,8 +166,8 @@
 .onoff-switch:before {
     position: absolute;
     content: "";
-    height: 12px;
-    width: 12px;
+    height: 13px;
+    width: 13px;
     left: 4px;
     bottom: 4px;
     background-color: #fff;

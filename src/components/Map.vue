@@ -1,6 +1,23 @@
 <template>
   <BottomNav :nowPage="nowPage"></BottomNav>
 
+  <!-- 로딩 스피너 -->
+  <div v-if="isLoading == true" 
+  style="
+  width: 100vw; 
+  height: 100vh;
+  vertical-align: center;
+  " class="text-center d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-secondary text-center" role="status"
+      style="width: 50px; height: 50px; border-width: 0.5em">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <div>
+      <!-- <div style="font-weight: 600; font-size: 20px; color: gray;">불러오는 중...</div> -->
+    </div>
+  </div>
+
+
   <div id="map">
     <div class="map-category">
       <ul class="map-list-style-ul">
@@ -146,6 +163,8 @@ export default {
       // 현재 위치
       nowLocMarker: null,
 
+      // 로딩 여부
+      isLoading: true,
     }
   },
   components: {
@@ -245,11 +264,11 @@ export default {
                 // 마커에 클릭이벤트 등록
                 kakao.maps.event.addListener(marker, 'click', function () {
                   console.log(thisMarkerData);
-                  
+
                   realRouter.push(
                     {
                       path: '/map/detail',
-                      query: { 
+                      query: {
                         title: thisMarkerData.data.title,
                         op_st_dt: thisMarkerData.data.op_st_dt,
                         op_ed_dt: thisMarkerData.data.op_ed_dt,
@@ -259,7 +278,7 @@ export default {
                       }
                     }
                   );
-                  
+
                 });
 
               }
@@ -283,10 +302,10 @@ export default {
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-                // 현재 위치 마커 초기화
-      if (this.nowLocMarker != null) {
-        this.nowLocMarker.setMap(null);
-      }
+          // 현재 위치 마커 초기화
+          if (this.nowLocMarker != null) {
+            this.nowLocMarker.setMap(null);
+          }
 
           var lat = position.coords.latitude, // 위도
             lon = position.coords.longitude; // 경도
@@ -309,7 +328,7 @@ export default {
           });
 
           this.nowLocMarker = nowLocMarker;
-            this.nowLocMarker.setMap(this.map);
+          this.nowLocMarker.setMap(this.map);
 
           // 부드럽게 지도 이동
           this.map.panTo(locPosition);
@@ -391,22 +410,37 @@ export default {
       //   alert(err);
       //   console.log(err);
       // });
+      await console.log("로딩 현황: " + this.isLoading);
+      await this.getDatas();
+      await this.isLoadingToggle();
+    },
+    getDatas: async function () {
       await axios.get('/api/data/play').then((res) => {
         this.playData = res.data;
+        console.log("play ready");
         //console.log(this.playData);
       })
       await axios.get('/api/data/concert').then((res) => {
         this.concertData = res.data;
+        console.log("concert ready");
         //console.log(this.concertData);
       })
       await axios.get('/api/data/musical').then((res) => {
         this.musicalData = res.data;
+        console.log("musical ready");
         //console.log(this.musicalData);
       })
       await axios.get('/api/data/exhibit').then((res) => {
         this.exhibitData = res.data;
+        console.log("exhibit ready");
         //console.log(this.exhibitData);
       })
+    },
+    isLoadingToggle: async function () {
+      if(this.isLoading == true){
+        this.isLoading = false;
+      }
+      await console.log("로딩 현황: " + this.isLoading);
     }
   }
 }
