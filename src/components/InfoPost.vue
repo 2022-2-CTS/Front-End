@@ -30,10 +30,18 @@
 
     <!-- 태그 선택 -->
     <div class="post-btn-group">
-      <div class="date-select-button" @click="inputData.tag = 0">지금당장</div>
-      <div class="date-select-button" @click="inputData.tag = 1">어제 갔다왔음</div>
-      <div class="date-select-button" @click="inputData.tag = 2">오늘 하더라</div>
-      <div class="date-select-button" @click="inputData.tag = 3">내일도 한대</div>
+      <div class="date-select-button" @click="inputData.tag = 0">
+        지금당장
+      </div>
+      <div class="date-select-button" @click="inputData.tag = 1">
+        어제 갔다왔음
+      </div>
+      <div class="date-select-button" @click="inputData.tag = 2">
+        오늘 하더라
+      </div>
+      <div class="date-select-button" @click="inputData.tag = 3">
+        내일도 한대
+      </div>
     </div>
 
     <!-- 내용 -->
