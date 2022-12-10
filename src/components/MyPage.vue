@@ -3,9 +3,10 @@
     <div class="mP-title">
       내정보
     </div>
+    <hr/>
     <div class="post-display">
       <div>
-        <div class="my-info">
+        <div class="my-info ">
           아이디
         </div>
         <Input class="post-disinput"></Input>
@@ -32,10 +33,10 @@
     </div>
     <hr style="margin-Top:50px"/>
     <div class="mP-title">찜목록</div>
-    <div v-for="(v, i) in 3" :key="i">
+    <div v-for="(v, i) in 4" :key="i">
     <div class="fav-card">
       <div class="fav-card-title">이것은 행사 이름입니다</div>
-      <img :src="require('@/img/heart_true.svg')" class="fav-icon"/>
+      <img :src="require('@/img/heart_true.svg')" class="fav-icon" style="width: 40px; height: 40px;"/>
     </div>
     </div>
   </div>
