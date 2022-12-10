@@ -181,7 +181,7 @@ export default {
     // 맵 생성
     initMap: async function () {
       await this.request();
-      //var router = this.$router;
+      var router = this.$router;
       // 데이터 종류에 따라 마커 그리는 함수
       async function drawMarker(nowObject, nowObjectLength, map, locationArr, dataArr, imgSrc, markerArr) {
         console.log("--now marker array1--");
@@ -191,7 +191,7 @@ export default {
         //console.log(imgSrc);
         //console.log("장소 개수 : " + Object.keys(nowObject).length);
 
-        //var router2 = router;
+        var router2 = router;
 
         // 장소의 개수만큼 반복
         for (var i = 0; i < nowObjectLength; i++) {
@@ -226,7 +226,7 @@ export default {
             geocoder.addressSearch(locationData, (result, status) => {
               var coords;
               var thisMarkerData = thisData;
-              //var realRouter = router2;
+              var realRouter = router2;
               // 정상적으로 검색이 완료됐으면 
               if (status === kakao.maps.services.Status.OK) {
                 //console.log(result);
@@ -245,7 +245,7 @@ export default {
                 // 마커에 클릭이벤트 등록
                 kakao.maps.event.addListener(marker, 'click', function () {
                   console.log(thisMarkerData);
-                  /*
+                  
                   realRouter.push(
                     {
                       path: '/map/detail',
@@ -259,7 +259,7 @@ export default {
                       }
                     }
                   );
-                  */
+                  
                 });
 
               }

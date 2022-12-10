@@ -2,6 +2,14 @@ body {
     text-align: center;
 }
 
+.before-button {
+    justify-content: left;
+    align-items: center;
+    padding: 15px;
+    margin-top: 7px;
+    padding-bottom: 0px;
+}
+
 .map-detail-heart-container {
     display: flex;
     justify-content: right;
@@ -38,4 +46,8 @@ body {
     font-size: 15px;
     margin-top: 10px;
     margin-bottom: 40px;
+}
+
+::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
 }
