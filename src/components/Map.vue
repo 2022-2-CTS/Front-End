@@ -35,15 +35,15 @@
             </div>
           </div>
         </li>
-        <!-- <span>
+        <span>
           <button
             style="border:1px solid lightgray; border-radius:20px; background:white; padding-bottom:4px; color:black; font-weight:300; font-size:1em; "
             @click="this.$router.push('/chat')">
             chat
-            <div :src="require('@/img/ChatIcon.svg')" style="width: 10px;" />
+            <div style="width: 10px;" />
           </button>
 
-        </span> -->
+        </span>
 
       </ul>
     </div>
@@ -128,7 +128,7 @@ export default {
         },
       ],
       // 모달창 오픈 여부
-      testModal: true,
+      testModal: false,
       responseData: "",
       // 현재 페이지 : map (1)
       nowPage: 1,
