@@ -143,8 +143,9 @@ export default {
 
       // 마커 배열
       markerArr: [],
+      // 현재 위치
+      nowLocMarker: null,
 
-      
     }
   },
   components: {
@@ -280,6 +281,46 @@ export default {
         this.map = new kakao.maps.Map(container, options);
       }
 
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+                // 현재 위치 마커 초기화
+      if (this.nowLocMarker != null) {
+        this.nowLocMarker.setMap(null);
+      }
+
+          var lat = position.coords.latitude, // 위도
+            lon = position.coords.longitude; // 경도
+
+          console.log("lat : " + lat + ", lon : " + lon);
+
+          this.myLat = lat;
+          this.myLng = lon;
+
+          // 내 위치!
+          var locPosition = new kakao.maps.LatLng(lat, lon);
+
+          // 현재 위치 마커
+          var nowLocImage = new kakao.maps.MarkerImage(require('@/img/nowPosMarker.svg'), new kakao.maps.Size(50, 50));
+
+          var nowLocMarker = new kakao.maps.Marker({
+            map: this.map,
+            position: new kakao.maps.LatLng(this.myLat, this.myLng),
+            image: nowLocImage
+          });
+
+          this.nowLocMarker = nowLocMarker;
+            this.nowLocMarker.setMap(this.map);
+
+          // 부드럽게 지도 이동
+          this.map.panTo(locPosition);
+          // this.initMap();
+        });
+      }
+      else {
+        console.log("못씀");
+      }
+
+
       console.log(this.markerArr);
 
       for (var i = 0; i < this.markerArr.length; i++) {
@@ -338,7 +379,7 @@ export default {
         if (i.number != this.cultureData[j].number) {
           this.cultureData[j].click = false;
         }
-          console.log(this.cultureData[j].click);
+        console.log(this.cultureData[j].click);
       }
       this.initMap();
     },
