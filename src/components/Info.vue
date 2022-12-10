@@ -6,7 +6,6 @@
       </div>
     </div>
     <hr/>
-
     <div style="margin-bottom:20px">
       <label class="switch-button align-base-text-top">
         <input type="checkbox"  @click="infoshare=!infoshare"/>
@@ -15,8 +14,6 @@
         <span v-if="infoshare" class="switch-text align-top">정보공유</span>
         <span v-if="!infoshare" class="switch-text align-top">같이고고</span>
     </div>
-
-
   <div v-if="infoshare"><Infoshare/></div>
   <div v-else><InfoTogether/></div>
 </template>
