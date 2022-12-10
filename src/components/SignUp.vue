@@ -22,7 +22,7 @@
               <div class="control">
                 <div class="button" @click="toggleShow" style="margin-left: 100px;">
                   <span class="icon is-small is-right">
-                    <div class="fas" :class="{ 'fa-eye-slash': showPassword, 'fa-eye': !showPassword }">비밀번호 표시</div>
+                    <div>비밀번호 표시</div>
                   </span>
                 </div>
               </div>
