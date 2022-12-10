@@ -42,10 +42,10 @@
     </div>
 
     
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
   </div>
   <BottomNav :nowPage="nowPage"/>
 </template>
