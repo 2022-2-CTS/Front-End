@@ -32,8 +32,11 @@
     </div>
     <hr style="margin-Top:50px"/>
     <div class="mP-title">찜목록</div>
+    <div v-for="(v, i) in 3" :key="i">
     <div class="fav-card">
-      <div>이것은 행사 이름입니다</div>
+      <div class="fav-card-title">이것은 행사 이름입니다</div>
+      <img :src="require('@/img/heart_true.svg')" class="fav-icon"/>
+    </div>
     </div>
   </div>
 </template>
