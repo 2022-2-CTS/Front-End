@@ -31,8 +31,8 @@
 
           </div>
         </div>
-        <div class="info-map" style="margin-bottom:20px">
-          위치 지도
+        <div class="info-map" style="margin-bottom:20px;">
+          <img :src="require(`@/img/infoDummy/infoDummy${i + 1}.png`)" style="width: 90vw;"/>
         </div>
         <div class="info-detail">
           {{ postData[i].content }}
@@ -62,6 +62,13 @@ export default {
       postData: [],
       // 현재 페이지 : info (0)
       nowPage: 0,
+      // info share dummy data
+      infoDummy: [
+        '@/img/infoDummy/infoDummy1.png',
+        '@/img/infoDummy/infoDummy2.png',
+        '@/img/infoDummy/infoDummy3.png',
+        '@/img/infoDummy/infoDummy4.png',
+      ]
     }
   },
   components: {

@@ -1,6 +1,6 @@
 <template>
     <div class="info-title">
-      해운대구
+      부산진구
       <div class="info-map-icon">
         <img :src="require('@/img/now_position_icon.svg')" style="width: 38px; height: 38px; padding-top: 5px;" />
       </div>
