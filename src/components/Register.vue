@@ -373,7 +373,7 @@
 }
 
 .final-btn{
-  width:calc(75vh - 230px);
+  width:calc(70vh - 230px);
 }
 
 .final-button{
