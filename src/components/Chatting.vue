@@ -76,6 +76,7 @@ export default {
       chattingList: [{}],
       isConnected:false,
       instance : 0,
+      justOneClick: false,
     });
 
     const realTime = [{}];
@@ -105,6 +106,7 @@ export default {
     var eventsource;
 
     const click_title = (title, yid) => {
+      state.justOneClick=true;
       state.title = title;
       state.you_id = yid;
       console.log(state.you_id);
