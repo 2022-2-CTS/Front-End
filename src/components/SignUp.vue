@@ -16,8 +16,8 @@
           <FormItem>
             <div class="field has-addons">
             <div class="control is-expanded">
-              <input v-if="showPassword" type="text" class="login" v-model="password"  placeholder="비밀번호"/>
-              <input v-else type="password" class="login" v-model="password" placeholder="비밀번호"/>
+              <input v-if="showPassword" type="text" class="login" placeholder="비밀번호" v-model="value" @input="state.form.loginPw = $event.target.value"/>
+              <input v-else type="password" class="login" placeholder="비밀번호" v-model="value" @input="state.form.loginPw = $event.target.value"/>
             </div>
               <div class="control">
                 <div class="button" @click="toggleShow" style="margin-left: 100px;">
