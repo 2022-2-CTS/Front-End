@@ -80,9 +80,15 @@ export default {
   },
   methods:{
     MakeChat(){
-      axios.post("/api/makechat", this.args).then((res) => {
-        console.log(res.data);
-      })
+      if(this.args.yid == ""){
+        alert("채팅방이 개설되지 못했습니다. 다시 눌러주세요!!")
+      }else{
+        axios.post("/api/makechat", this.args).then((res) => {
+          console.log(res.data);
+        })
+        alert("채팅방이 개설되었습니다. 채팅방으로 이동합니다.")
+        this.$router.push('/chat')
+      }
     }
   }
 }
