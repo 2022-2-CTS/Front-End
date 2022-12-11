@@ -8,16 +8,11 @@
 
   <div class="post-display">
     <!-- 행사 제목 -->
-    <div>
-      행사제목
-      <Input class="post-input" @input="inputData.title = $event.target.value"></Input>
-    </div>
+    <div class="post-input-label">행사제목</div>
+    <Input class="post-input-title" @input="inputData.title = $event.target.value"></Input>
     <!-- 위치 추가 -->
-    <div>
       <!-- 위치 -->
-      <div class="post-label">
-        위치
-      </div>
+      <div class="post-input-label">위치</div>
       <!-- 위치 선택 아이콘 -->
       <div>
         <Input class="map-input"></Input>
@@ -26,10 +21,9 @@
             style="width: 38px; height: 38px; padding-top: 5px;margin-top: 3px;" />
         </div>
       </div>
-    </div>
 
     <!-- 태그 선택 -->
-    <div style="margin-top:30px">
+    <div style="margin: auto;margin-top:30px;margin-left: 6%;margin-right: 3%;">
       <div class="date-select-button" @click="inputData.tag = 0">
         지금당장
       </div>
@@ -43,15 +37,19 @@
         내일도 한대
       </div>
     </div>
-  </div>
 
-    <!-- <div class="post-label">내용</div>
-    <Input class="post-input-box" @input="inputData.content = $event.target.value"></Input> -->
+
+    <div class="post-label">내용</div>
+    <Input class="post-input-box" @input="inputData.content = $event.target.value"></Input>
+
+
+    <div class="post-btn" style="margin:auto" @click="writeEnd">
+      <button class="final-button" @click="goSignUp">작성 완료</button>
+    </div>
+
+  </div>
 
   <!-- 작성 완료 -->
-  <div class="final-btn" style="margin:auto" @click="writeEnd">
-    <button class="final-button" @click="goSignUp">작성 완료</button>
-  </div>
 </template>
   
 <script>
