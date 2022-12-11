@@ -34,7 +34,7 @@
         <div class="info-detail">
           {{ togetherData[i].content }}
         </div>
-        <div class="toget-button">같이가요</div>
+        <div class="toget-button" @click="MakeChat(); args.yid = togetherData[i].userId">같이가요</div>
       </div>
       <hr />
     </div>
@@ -58,6 +58,10 @@ export default {
     return {
       togetherData: [],
       nowPage: 0,
+      args:{
+        yid:"",
+        mid:localStorage.getItem('my_id'),
+      }
     }
   },
   components: {
@@ -73,6 +77,13 @@ export default {
       alert(err);
       console.log(err);
     });
+  },
+  methods:{
+    MakeChat(){
+      axios.post("/api/makechat", this.args).then((res) => {
+        console.log(res.data);
+      })
+    }
   }
 }
 </script>
