@@ -13,7 +13,7 @@
           <li
             class="list-group-item"
             v-for="list in state.chatList"
-            :key="list.title"
+            :key="list"
             @click="click_title(list._id, list.yid)"
           >
             <div v-if="state.my_id == list.yid" class="chat-list">
