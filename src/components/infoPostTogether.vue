@@ -58,6 +58,7 @@
     data() {
       return {
         inputData: {
+          userId: localStorage.getItem('my_id'), 
           title: "",
           tag: null,
           content: ""

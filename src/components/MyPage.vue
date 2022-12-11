@@ -1,4 +1,6 @@
 <template>
+  
+  <BottomNav :nowPage="nowPage"></BottomNav>
   <div>
     <div class="mP-title">
       내정보
@@ -40,20 +42,26 @@
     </div>
     </div>
   </div>
+
+  <br/>
+  <br/>
+  <br/>
+  <br/>
 </template>
   
 <script>
+import BottomNav from "./BottomNav.vue";
 
 export default {
   name: 'MyPage',
   data() {
     return {
-
+      nowPage: 2,
     }
   },
   components: {
-
-  }
+    BottomNav: BottomNav,
+  },
 }
 </script>
   

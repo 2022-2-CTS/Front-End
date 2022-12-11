@@ -4,7 +4,8 @@
       {{goLogginedMap()}}
     </div>
     <div v-else class="main-title">
-        <h1>부산시 문화예술 지도</h1>
+      <img :src="require('@/img/logo.svg')"
+            style="width: 400px; height: 220px;" />
     </div>
     <div>
       <div>
