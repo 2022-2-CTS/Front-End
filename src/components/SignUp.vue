@@ -77,6 +77,7 @@
             state.account = res.data
             state.realLoggedIn = true;
             console.log(res.data);
+            localStorage.setItem('my_id', state.form.loginId)
           }
         }).catch(() => {
           state.loggedIn = false;
