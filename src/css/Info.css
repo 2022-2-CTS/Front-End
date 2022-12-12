@@ -105,7 +105,7 @@
     border: 1px solid #D9D9D9;
     border-radius: 30px;
     width:100%;
-    height: 2rem;
+    height: 3rem;
     margin:auto;
 }
 .post-input-box{
@@ -126,10 +126,9 @@
 }
 .map-input{
     width: 80%;
-    height: 2rem;
+    height: 3rem;
     border: 1px solid #D9D9D9;
     border-radius: 30px;
-    margin-top: 2%;
 }
 
 .date-select-button{
