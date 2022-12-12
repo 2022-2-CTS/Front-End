@@ -47,12 +47,16 @@ const routes = [
       component: InfoShare,
     },
     {
-      path: "/info/post",
+      path: "/info/share/post",
       component: InfoPost,
     },
     {
       path: "/info/together",
       component: InfoTogether,
+    },
+    {
+      path: "/info/together/post",
+      component: InfoPostTogether,
     },
     {
       path: "/mypage",
@@ -65,10 +69,6 @@ const routes = [
     {
       path: "/chat",
       component: Chatting,
-    },
-    {
-      path: "/info/post/together",
-      component: InfoPostTogether,
     }
   ];
   
