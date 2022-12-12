@@ -194,7 +194,7 @@ export default {
     chatIO.on("broadcast message", function (msg) {
       console.log("message: " + msg);
       realTime.push(msg);
-      $('#content').append('<div class="chat-box">' + msg.userid + '    ' + msg.content + '<div>');
+      $('#content').append('<div class="chat-box">' + '<h4>' + msg.userid + '</h4>' + '    ' + msg.content + '<div>');
     });
 
     return { state, send, click_title, realTime, reload };
