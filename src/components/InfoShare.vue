@@ -40,6 +40,7 @@
       </div>
       <hr />
     </div>
+    <img :src="require('@/img/plus_post_button.svg')" class='btn-floating'/>
     <br/>
     <br/>
     <br/>
