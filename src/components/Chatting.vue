@@ -74,7 +74,7 @@ import $ from 'jquery';
 export default {
   setup() {
     const state = reactive({
-      chatList: [{}],
+      chatList: [{_id:"", mid:"", yid:"", date:""}],
       my_id: localStorage.getItem('my_id'),
       you_id: "",
       content: "",
@@ -97,6 +97,9 @@ export default {
       origins: "*:*",
     });
 
+
+    console.log(state.chatList)
+
     const args = {
       my_id: state.my_id,
     };
@@ -106,7 +109,10 @@ export default {
         console.log(res.data[i]);
         if (res.data[i].mid == state.my_id || res.data[i].yid == state.my_id) {
           state.chatList[i] = res.data[i];
+          console.log(i);
           console.log(state.chatList[i]);
+        }else{
+          state.chatList[i] = "";
         }
       }
     });
