@@ -214,11 +214,17 @@
     margin: 5px;
     background-color: #FFB800;
 }
-
-.FloatBtn{
-    position: sticky;
-}
 .post-btn{
     width:calc(70vh - 230px);
     margin-left: 10px;
   }
+  .btn-floating {
+    width: 5rem;
+    height: 5rem;
+    padding: 0;
+    outline: 0;
+    position: sticky;
+    bottom: 120px;
+    float: right;
+    right: 20px;
+}
