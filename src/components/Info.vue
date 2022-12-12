@@ -1,6 +1,12 @@
 <template>
     <div class="info-title">
       부산진구
+
+      
+      <img :src="require('@/img/chatButton.svg')" style="float: left; margin-left: -30px;
+      width: 50px; margin-top: -3px;"
+      @click="this.$router.push('/chat')" />
+
       <div class="info-map-icon">
         <img :src="require('@/img/now_position_icon.svg')" style="width: 38px; height: 38px; padding-top: 5px;" />
       </div>
