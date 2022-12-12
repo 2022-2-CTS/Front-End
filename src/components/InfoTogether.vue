@@ -38,7 +38,8 @@
       </div>
       <hr />
     </div>
-    <img :src="require('@/img/plus_post_button.svg')" class='btn-floating'/>
+    <img :src="require('@/img/plus_post_button.svg')" class='btn-floating' 
+    @click="this.$router.push('/info/together/post')"/>
   </div>
 
   <br/>
