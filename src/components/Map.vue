@@ -36,15 +36,6 @@
             </div>
           </div>
         </li>
-        <span>
-          <button
-            style="border:1px solid lightgray; border-radius:20px; background:white; padding-bottom:4px; color:black; font-weight:300; font-size:1em; "
-            @click="this.$router.push('/chat')">
-            chat
-            <div style="width: 10px;" />
-          </button>
-
-        </span>
 
       </ul>
     </div>

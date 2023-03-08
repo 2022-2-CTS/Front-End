@@ -11,13 +11,13 @@
         <div class="my-info ">
           아이디
         </div>
-        <Input class="post-disinput"></Input>
+        <Input class="post-disinput" placeholder="miseon1221"></Input>
       </div>
       <div>
         <div class="my-info">
           휴대폰 번호
         </div>
-        <Input class="post-input"></Input>
+        <Input class="post-input" placeholder="010-2001-1221"></Input>
         <div>
           <div class="my-info">
             비밀번호
@@ -35,9 +35,9 @@
     </div>
     <hr style="margin-Top:50px"/>
     <div class="mP-title">찜목록</div>
-    <div v-for="(v, i) in 4" :key="i">
+    <div v-for="(v, i) in item" :key="i">
     <div class="fav-card">
-      <div class="fav-card-title">이것은 행사 이름입니다</div>
+      <div class="fav-card-title">{{ v }}</div>
       <img :src="require('@/img/heart_true.svg')" class="fav-icon" style="width: 40px; height: 40px;"/>
     </div>
     </div>
@@ -57,6 +57,12 @@ export default {
   data() {
     return {
       nowPage: 2,
+      item: [
+        "각진원형 : 김용관",
+        "Habitat One",
+        '뮤지컬＜캣츠＞오리지널 내한',
+        '크리스마스 칸타타 2022'
+      ]
     }
   },
   components: {
